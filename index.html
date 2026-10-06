@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hoe Werkt Je Brein? — Wetenschappelijk Overzicht</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .disclaimer { margin: 10px auto 0; max-width: 760px; font-size: 0.82rem; text-align: center; color: var(--text-muted); }
+        .source-line { font-size: 0.78rem; color: var(--text-muted); margin: 10px 0 0; }
+        .unit-note { font-size: 0.78rem; color: var(--text-muted); margin: 6px 0 0; }
+        .metric-value.neutral { color: var(--text-primary); }
+        .highlight-box .metric-value { color: var(--text-primary); font-size: 0.88rem; }
+        .biblio { margin-top: 32px; font-size: 0.82rem; max-width: 100%; }
+        .biblio li { margin-bottom: 6px; }
+        .region-item { cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Hoe Werkt Je Brein?</h1>
+        <p class="subtitle">Kies een activiteit en lees wat wetenschappelijk onderzoek heeft ontdekt.</p>
+        <p class="disclaimer">Onderzoekers kijken naar groepen mensen. Wat zij zien hoeft niet voor elk individu te gelden. Het breinschema hieronder is een vereenvoudigde weergave.</p>
+    </header>
+
+    <main class="dashboard-grid">
+
+        <div class="card canvas-container">
+            <div class="canvas-header">
+                <span class="badge">Schema van het brein</span>
+                <span id="activityBadge" class="badge-status">Kies een activiteit</span>
+            </div>
+
+            <canvas id="neuroCanvas" aria-label="Schematisch brein met vier gebieden"></canvas>
+
+            <div class="explanation-card" id="dynamicInfo">
+                <h4>Kies een activiteit of klik op een deel van het brein</h4>
+                Je leest dan wat onderzoekers hebben ontdekt en hoe groot het onderzoek was.
+            </div>
+            <p class="unit-note" id="canvasNote">De bewegende stippen geven de actieve signaaloverdracht weer tussen de visuele cortex en het betrokken breingebied.</p>
+            <p class="source-line" id="sourceLine"></p>
+        </div>
+
+        <div class="card controls">
+            <h3>1. Kies een activiteit</h3>
+            <div class="button-grid">
+                <button class="btn-activity active" data-act="tiktok">
+                    <span>TikTok / Reels</span>
+                    <small>Concentratie</small>
+                </button>
+                <button class="btn-activity" data-act="swipen">
+                    <span>Swipen op een dating-app</span>
+                    <small>Gevoel en uiterlijk</small>
+                </button>
+                <button class="btn-activity" data-act="bedscherm">
+                    <span>Scherm voor het slapen</span>
+                    <small>Slaapkwaliteit</small>
+                </button>
+                <button class="btn-activity" data-act="gamen">
+                    <span>Gamen</span>
+                    <small>Beloning</small>
+                </button>
+                <button class="btn-activity" data-act="plus18">
+                    <span>Beelden +18</span>
+                    <small>Beloningsgebied</small>
+                </button>
+                <button class="btn-activity reset-act" data-act="natuur">
+                    <span>Buiten in de natuur</span>
+                    <small>Stresshormoon</small>
+                </button>
+            </div>
+
+            <h3>2. Wat ontdekten onderzoekers?</h3>
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <small>Ontdekking</small>
+                    <div class="metric-value neutral" id="dopamineVal"></div>
+                </div>
+                <div class="metric-box">
+                    <small>Grootte onderzoek</small>
+                    <div class="metric-value neutral" id="fatigueVal"></div>
+                </div>
+                <div class="metric-box">
+                    <small>Stress</small>
+                    <div class="metric-value neutral" id="stressVal"></div>
+                </div>
+                <div class="metric-box highlight-box">
+                    <small>Alleen schermtijd</small>
+                    <div class="metric-value val-recovery" id="recoveryVal">Bij tieners zegt het aantal uren op een scherm maar heel weinig over hoe blij ze zijn (hooguit 0,4%). Wanneer en hoe je een scherm gebruikt lijkt meer uit te maken. (Orben &amp; Przybylski 2019)</div>
+                </div>
+            </div>
+            <p class="unit-note" id="unitNote"></p>
+
+            <h3>3. Klik op een deel van het brein</h3>
+            <div class="region-list">
+                <div class="region-item" data-region="visual">
+                    <div class="region-dot dot-blue"></div>
+                    <div><strong>Ogen-centrum (visuele cortex):</strong> verwerkt de beelden van je ogen.</div>
+                </div>
+                <div class="region-item" data-region="dopamine">
+                    <div class="region-dot dot-green"></div>
+                    <div><strong>Beloningscentrum (nucleus accumbens):</strong> speelt mee als je iets leuks of spannends doet.</div>
+                </div>
+                <div class="region-item" data-region="amygdala">
+                    <div class="region-dot dot-red"></div>
+                    <div><strong>Alarmcentrum (amygdala):</strong> speelt mee bij gevoelens zoals schrik en angst.</div>
+                </div>
+                <div class="region-item" data-region="pfc">
+                    <div class="region-dot dot-purple"></div>
+                    <div><strong>Denkcentrum (prefrontale cortex):</strong> helpt bij plannen, focus en jezelf afremmen.</div>
+                </div>
+            </div>
+            <p class="unit-note">Dit is een schematische weergave. Elk deel van het brein vervult meerdere functies.</p>
+        </div>
+    </main>
+
+    <section class="biblio">
+        <h3>Bronnen &amp; Literatuur</h3>
+        <ol>
+            <li>Nguyen, L. et al. (2025). Feeds, feelings, and focus: a systematic review and meta-analysis of short-form video use. <em>Psychological Bulletin, 151</em>(9), 1125–1146.</li>
+            <li>Su, C. et al. (2021). Viewing personalized video clips recommended by TikTok activates default mode network and ventral tegmental area. <em>NeuroImage, 237</em>, 118136. doi:10.1016/j.neuroimage.2021.118136</li>
+            <li>Meta-analyse van swipe-gebaseerde dating-apps en mentale gezondheid (2026). <em>Communications Psychology</em>. doi:10.1038/s44271-026-00488-7</li>
+            <li>Carter, B. et al. (2016). Association between portable screen-based media device access or use and sleep outcomes. <em>JAMA Pediatrics, 170</em>(12). doi:10.1001/jamapediatrics.2016.2341</li>
+            <li>Koepp, M. J. et al. (1998). Evidence for striatal dopamine release during a video game. <em>Nature, 393</em>, 266–268. doi:10.1038/30498</li>
+            <li>Hunter, M. R., Gillespie, B. W., &amp; Chen, S. Y.-P. (2019). Urban nature experiences reduce stress in the context of daily life based on salivary biomarkers. <em>Frontiers in Psychology, 10</em>, 722. doi:10.3389/fpsyg.2019.00722</li>
+            <li>Yao, W., Zhang, X., &amp; Gong, Q. (2021). The effect of exposure to the natural environment on stress reduction: a meta-analysis.</li>
+            <li>Kühn, S., &amp; Gallinat, J. (2014). Brain structure and functional connectivity associated with pornography consumption. <em>JAMA Psychiatry, 71</em>(7), 827–834. doi:10.1001/jamapsychiatry.2014.93</li>
+            <li>Gola, M. et al. (2017). Can pornography be addictive? An fMRI study of men seeking treatment for problematic pornography use. <em>Neuropsychopharmacology</em>.</li>
+            <li>Orben, A., &amp; Przybylski, A. K. (2019). The association between adolescent well-being and digital technology use. <em>Nature Human Behaviour, 3</em>. doi:10.1038/s41562-018-0506-1</li>
+        </ol>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        (function () {
+            var el = document.getElementById('stressVal');
+            var box = el.closest('.metric-box');
+            function check() {
+                var t = el.textContent.trim();
+                box.style.display = (t === '' || /^niet (onderzocht|gemeten)\.?$/i.test(t)) ? 'none' : '';
+            }
+            new MutationObserver(check).observe(el, { childList: true, characterData: true, subtree: true });
+            check();
+        })();
+    </script>
+</body>
+</html>
