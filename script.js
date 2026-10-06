@@ -86,6 +86,16 @@ function resize() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
+// Vloeiend scrollen naar het brein-canvas op mobiel/gsm
+function scrollToCanvasIfNeeded() {
+  if (window.innerWidth < 900) {
+    const canvasContainer = document.querySelector('.canvas-container');
+    if (canvasContainer) {
+      canvasContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+}
+
 const xy = k => [POS[k][0] * W, POS[k][1] * H];
 
 function draw() {
@@ -159,7 +169,7 @@ function draw() {
 
 function setText(id, v) { document.getElementById(id).textContent = v; }
 
-function showActivity(key) {
+function showActivity(key, triggerScroll = false) {
   const a = ACTS[key]; current = key;
   document.querySelectorAll('.btn-activity').forEach(b => b.classList.toggle('active', b.dataset.act === key));
   setText('activityBadge', a.badge);
@@ -174,9 +184,13 @@ function showActivity(key) {
   setText('stressVal', a.stress);
   setText('unitNote', a.unit); 
   setText('sourceLine', a.source);
+
+  if (triggerScroll) {
+    scrollToCanvasIfNeeded();
+  }
 }
 
-function showRegion(key) {
+function showRegion(key, triggerScroll = false) {
   current = null;
   document.querySelectorAll('.btn-activity').forEach(b => b.classList.remove('active'));
   const r = REGIONS[key];
@@ -188,21 +202,30 @@ function showRegion(key) {
   info.appendChild(h); info.appendChild(document.createTextNode(r.text));
   
   setText('sourceLine', ''); 
+
+  if (triggerScroll) {
+    scrollToCanvasIfNeeded();
+  }
 }
 
-document.querySelectorAll('.btn-activity').forEach(b => b.addEventListener('click', () => showActivity(b.dataset.act)));
-document.querySelectorAll('.region-item').forEach(el => el.addEventListener('click', () => showRegion(el.dataset.region)));
+document.querySelectorAll('.btn-activity').forEach(b => {
+  b.addEventListener('click', () => showActivity(b.dataset.act, true));
+});
+
+document.querySelectorAll('.region-item').forEach(el => {
+  el.addEventListener('click', () => showRegion(el.dataset.region, true));
+});
 
 canvas.addEventListener('click', e => {
   const r = canvas.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
   Object.keys(POS).forEach(k => { 
     const [x, y] = xy(k); 
-    if (Math.hypot(mx - x, my - y) < 25) showRegion(k); 
+    if (Math.hypot(mx - x, my - y) < 25) showRegion(k, false); 
   });
 });
 
 window.addEventListener('resize', resize);
 
 resize();
-showActivity('tiktok');
+showActivity('tiktok', false);
 requestAnimationFrame(draw);
