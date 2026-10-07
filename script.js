@@ -45,7 +45,7 @@ const ACTS = {
     badge: 'Beelden +18', target: 'dopamine',
     title: 'Beelden voor volwassenen (+18)',
     text: 'Onderzoekers keken naar volwassen mannen die veel of weinig van zulke beelden bekeken. Bij wie meer keek, was een deel van het beloningsgebied gemiddeld kleiner en reageerde het minder sterk op zulke beelden. Bij mannen die hulp zochten vanwege moeite met stoppen, reageerde het beloningsgebied juist sterker op aankondigende signalen.',
-    found: 'Verschillen in beloningsgebied bij frequente kijkers; oorzakelijk verband is onbekend.',
+    found: 'Verschillen in beloningsgebied bij frequente kijkers.',
     measured: '64 volwassen mannen met hersenscans, aangevuld met fMRI-vervolgonderzoek.',
     stress: 'Niet onderzocht.',
     unit: NOTE,
