@@ -1,4 +1,3 @@
-// Wetenschappelijke teksten gebaseerd op de onderzoeken
 const NOTE = 'Onderzoekers zien dit bij groepen mensen. Dit beschrijft een verband bij groepen, geen direct oorzakelijk verband voor elk individu.';
 const ACTS = {
   tiktok: {
@@ -86,7 +85,6 @@ function resize() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
-// Vloeiend scrollen naar het brein-canvas op mobiel/gsm
 function scrollToCanvasIfNeeded() {
   if (window.innerWidth < 900) {
     const canvasContainer = document.querySelector('.canvas-container');
@@ -101,7 +99,6 @@ const xy = k => [POS[k][0] * W, POS[k][1] * H];
 function draw() {
   ctx.clearRect(0, 0, W, H);
   
-  // Breinnetwerk verbindingen
   EDGES.forEach(([a, b]) => {
     const [x1, y1] = xy(a), [x2, y2] = xy(b);
     const isTarget = current && ACTS[current] && (ACTS[current].target === a || ACTS[current].target === b);
@@ -114,7 +111,6 @@ function draw() {
     ctx.stroke();
   });
 
-  // Geanimeerde signaalstippen over de actieve zenuwbaan
   if (current && ACTS[current]) {
     const targetKey = ACTS[current].target;
     const [x1, y1] = xy('visual');
@@ -126,13 +122,11 @@ function draw() {
       const px = x1 + (x2 - x1) * p;
       const py = y1 + (y2 - y1) * p;
 
-      // Glow effect rond stippen
       ctx.fillStyle = 'rgba(96, 165, 250, 0.25)';
       ctx.beginPath();
       ctx.arc(px, py, 6, 0, Math.PI * 2);
       ctx.fill();
 
-      // Kern van de signaalstip
       ctx.fillStyle = '#60a5fa';
       ctx.beginPath();
       ctx.arc(px, py, 3, 0, Math.PI * 2);
@@ -140,7 +134,6 @@ function draw() {
     }
   }
 
-  // Breinregio punten (Nodes)
   Object.keys(POS).forEach(k => {
     const [x, y] = xy(k);
     const isTarget = current && ACTS[current] && ACTS[current].target === k;
@@ -228,4 +221,289 @@ window.addEventListener('resize', resize);
 
 resize();
 showActivity('tiktok', false);
+
+const baseQuizBank = [
+  {
+    q: "Wat ontdekten onderzoekers (Hunter 2019) over de invloed van tijd doorbrengen in de natuur op stress?",
+    opts: [
+      "Het stresshormoon cortisol daalt aantoonbaar, vooral tussen 20 en 30 minuten.",
+      "Het heeft pas effect als je minimaal 5 uur onafgebroken in een bos bent.",
+      "In de natuur stijgt het stresshormoon juist door omgevingsprikkels.",
+      "Er is wetenschappelijk geen enkel effect gemeten."
+    ],
+    ans: 0,
+    exp: "Onderzoekers zagen dat speekselcortisol snel afneemt tijdens een natuurervaring, waarbij de daling per minuut het krachtigst is in het eerste half uur."
+  },
+  {
+    q: "Hoeveel procent van het welzijn van jongeren wordt volgens grootschalig onderzoek (Orben & Przybylski) verklaard door alleen het aantal uren schermtijd?",
+    opts: [
+      "Hooguit 0,4%",
+      "Ongeveer 35%",
+      "Ruim 75%",
+      "Precies 15%"
+    ],
+    ans: 0,
+    exp: "Uit de data blijkt dat louter het aantal uren op een scherm nauwelijks invloed heeft op welzijn. Hoe en wanneer schermen worden gebruikt, is veel bepalender."
+  },
+  {
+    q: "Wat ontdekten onderzoekers (Carter 2016) over schermgebruik vlak voor het slapengaan?",
+    opts: [
+      "Het hangt samen met kortere slaap en een hogere kans op een slechte slaapkwaliteit.",
+      "Het zorgt er juist voor dat mensen dubbel zo diep slapen.",
+      "Het heeft alleen effect op computers, niet op telefoons.",
+      "Er werd geen enkel verband met slaap gevonden."
+    ],
+    ans: 0,
+    exp: "Wie dagelijks schermen gebruikt direct voor het bedtijd, slaopt gemiddeld korter en meldt vaker een verstoorde nachtrust."
+  },
+  {
+    q: "Wat gebeurt er in het brein wanneer iemand gepersonaliseerde video's bekijkt (Su 2021)?",
+    opts: [
+      "Het beloningsgebied (VTA) wordt actiever bij video's op maat.",
+      "Het gezichtsvermogen neemt tijdelijk met 10% af.",
+      "Het gehoorcentrum schakelt zichzelf volledig uit.",
+      "Er is geen verschil met willekeurige video's."
+    ],
+    ans: 0,
+    exp: "Op fMRI-scans zagen onderzoekers dat video's die specifiek op het individuele kijkerprofiel zijn afgestemd, het Ventrale Tegmentale Area (VTA) sterker stimuleren."
+  },
+  {
+    q: "Wat lieten fMRI-scans bij gamers zien in het onderzoek van Koepp (1998)?",
+    opts: [
+      "Aanwijzingen voor dopamine-afgifte in het beloningscentrum tijdens het spelen.",
+      "Dat het brein stopt met het verwerken van visuele informatie.",
+      "Een directe stijging van het stresshormoon met 300%.",
+      "Dat gamen geen enkele reactie in de hersenen oproept."
+    ],
+    ans: 0,
+    exp: "In dit experiment werd een daling in raclopride-binding gemeten, wat wijst op de vrijgave van dopamine in het ventrale striatum tijdens het spelen."
+  },
+  {
+    q: "Wat is de voornaamste taak van de Visuele Cortex (het Ogen-centrum)?",
+    opts: [
+      "Het verwerken van licht en binnenkomende beelden van de ogen.",
+      "Het sturen van de spieren in je benen.",
+      "Het opslaan van herinneringen uit je vroege jeugd.",
+      "Het regelen van je hartslag."
+    ],
+    ans: 0,
+    exp: "De visuele cortex ligt achterin het brein en verwerkt alle visuele informatie die via de netvliezen binnenkomt."
+  },
+  {
+    q: "Welke functie vervult de Amygdala (het Alarmcentrum) in onze hersenen?",
+    opts: [
+      "Het verwerken van emoties zoals schrik, angst en stressresponsen.",
+      "Het berekenen van moeilijke wiskundige formules.",
+      "Het controleren van je ademhaling tijdens de slaap.",
+      "Het proeven van smaken op je tong."
+    ],
+    ans: 0,
+    exp: "De Amygdala speelt een sleutelrol bij het detecteren van mogelijke dreiging en het activeren van emotionele reacties."
+  },
+  {
+    q: "Waarvoor is de Prefrontale Cortex (het Denkcentrum) voornamelijk verantwoordelijk?",
+    opts: [
+      "Planning, concentratie, besluitvorming en zelfbeheersing.",
+      "Het herkennen van geuren.",
+      "Het verteren van voedsel in de maag.",
+      "Het aansturen van de reflexen in je knie."
+    ],
+    ans: 0,
+    exp: "Dit voorste deel van de hersenen helpt bij het nemen van verstandige beslissingen en het onderdrukken van spontane impulsen."
+  },
+  {
+    q: "Wat is de biologische rol van de stof 'dopamine' in ons zenuwstelsel?",
+    opts: [
+      "Het speelt een rol bij motivatie, leergedrag en het verwachten van een beloning.",
+      "Het is een stofje dat je direct in diepe slaap brengt.",
+      "Het ruimt bacteriën op in de bloedbaan.",
+      "Het zorgt ervoor dat je spieren niet vermoeid raken."
+    ],
+    ans: 0,
+    exp: "Dopamine is een neurotransmitter die gedrag stimuleert door het vooruitzicht op een beloning aantrekkelijk te maken."
+  },
+  {
+    q: "Wat zagen onderzoekers bij onderzoeken naar frequente gebruikers van dating-apps (meta-analyse 2026)?",
+    opts: [
+      "Een klein tot middelgroot verband met meer spanning of onzekerheid over uiterlijk.",
+      "Dat gebruikers automatisch een beter geheugen krijgen.",
+      "Dat alle gebruikers binnen een week trouwen.",
+      "Geen enkel verschil op welk vlak dan ook."
+    ],
+    ans: 0,
+    exp: "Uit de gepoolde onderzoeken bleek dat frequent swipe-gebruik samenhangt met iets meer gevoeligheid voor sociale evaluatie en spanning."
+  },
+  {
+    q: "Wat benadrukken onderzoekers bij fMRI-studies naar frequent kijken naar +18 beelden (Kühn 2014)?",
+    opts: [
+      "Dat een gemeten verschil in breinstructuur niet automatisch betekent dat de beelden de oorzaak zijn.",
+      "Dat het kijken naar beelden de hersenen fysiek doet smelten.",
+      "Dat fMRI-scans nooit betrouwbaar zijn.",
+      "Dat de oorzaak 100% vaststaat."
+    ],
+    ans: 0,
+    exp: "De onderzoekers gaven expliciet aan dat een correlatie (samenhang) geen causaal (oorzakelijk) bewijs is."
+  },
+  {
+    q: "Wat betekent het als een wetenschappelijke studie een 'correlatie' aantoont?",
+    opts: [
+      "Dat twee dingen samenhangen, maar dat het ene niet per se de directe oorzaak is van het andere.",
+      "Dat het bewijs 100% onomstotelijk vaststaat voor iedereen.",
+      "Dat het onderzoek mislukt is.",
+      "Dat de uitkomst alleen geldt voor dieren."
+    ],
+    ans: 0,
+    exp: "Correlatie geeft aan dat variabelen samen bewegen, maar om oorzaak en gevolg te bewijzen is experimenteel vervolgonderzoek nodig."
+  },
+  {
+    q: "Wat is het voordeel van een schermvrij uur voordat je gaat slapen?",
+    opts: [
+      "Het geeft je zenuwstelsel de tijd om tot rust te komen zonder constante nieuwe prikkels.",
+      "Het zorgt ervoor dat je telefoon batterij bespaart.",
+      "Het wist automatisch vervelende herinneringen van de dag.",
+      "Het verhoogt je lichaamstemperatuur."
+    ],
+    ans: 0,
+    exp: "Door voor het slapen geen felle lichtprikkels en continue informatie te verwerken, kan het brein gemakkelijker omschakelen naar de rustmodus."
+  },
+  {
+    q: "Waarom kijken wetenschappers bij hersenonderzoek naar grote groepen mensen?",
+    opts: [
+      "Omdat individuele verschillen groot zijn en trends pas bij groepen betrouwbaar zichtbaar worden.",
+      "Omdat het minder tijd kost dan 1 persoon testen.",
+      "Omdat alle mensen exact hetzelfde brein hebben.",
+      "Dat is een wettelijke verplichting zonder reden."
+    ],
+    ans: 0,
+    exp: "Wetenschap zoekt naar algemene patronen. Wat voor een hele groep geldt, hoeft niet voor elk individueel persoon op te gaan."
+  },
+  {
+    q: "Wat ontdekten onderzoekers (Nguyen 2025) bij een meta-analyse onder 98.000 mensen over korte video's?",
+    opts: [
+      "Frequent gebruik hangt gemiddeld samen met wat meer moeite met langdurige concentratie.",
+      "Korte video's verhogen het IQ gemiddeld met 20 punten.",
+      "Er is geen enkel verband gevonden met aandacht of focus.",
+      "Korte video's werken beter dan 8 uur slaap."
+    ],
+    ans: 0,
+    exp: "Wie heel intensief short-form video's consumeert en er moeilijk mee kan stoppen, vertoont gemiddeld wat meer moeite met het vasthouden van de aandacht."
+  }
+];
+
+let quizPool = [];
+let currentQuizIndex = 0;
+let userScore = 0;
+
+function shuffle(array) {
+  let arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function startNewQuiz() {
+  quizPool = shuffle(baseQuizBank).slice(0, 15);
+  currentQuizIndex = 0;
+  userScore = 0;
+
+  document.getElementById('quizContainer').style.display = 'block';
+  document.getElementById('quizResult').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const item = quizPool[currentQuizIndex];
+  document.getElementById('quizProgress').innerText = `Vraag ${currentQuizIndex + 1} van ${quizPool.length}`;
+  document.getElementById('quizQuestion').innerText = item.q;
+
+  const optionsContainer = document.getElementById('quizOptions');
+  optionsContainer.innerHTML = '';
+  document.getElementById('quizFeedback').style.display = 'none';
+
+  const mappedOptions = item.opts.map((optText, origIdx) => ({
+    text: optText,
+    isCorrect: origIdx === item.ans
+  }));
+  const shuffledOptions = shuffle(mappedOptions);
+
+  shuffledOptions.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt-btn';
+    btn.innerText = opt.text;
+    btn.onclick = () => handleAnswer(opt.isCorrect, btn);
+    optionsContainer.appendChild(btn);
+  });
+}
+
+function handleAnswer(isCorrect, clickedBtn) {
+  const allBtns = document.querySelectorAll('.quiz-opt-btn');
+  allBtns.forEach(b => b.disabled = true);
+
+  if (isCorrect) {
+    clickedBtn.classList.add('correct');
+    userScore++;
+  } else {
+    clickedBtn.classList.add('wrong');
+    allBtns.forEach(b => {
+      if (b.innerText === quizPool[currentQuizIndex].opts[0]) {
+        b.classList.add('correct');
+      }
+    });
+  }
+
+  document.getElementById('quizExplanation').innerHTML = `<strong>Uitleg:</strong> ${quizPool[currentQuizIndex].exp}`;
+  document.getElementById('quizFeedback').style.display = 'block';
+}
+
+document.getElementById('btnNextQuestion').addEventListener('click', () => {
+  currentQuizIndex++;
+  if (currentQuizIndex < quizPool.length) {
+    renderQuestion();
+  } else {
+    displayScoreboard();
+  }
+});
+
+function displayScoreboard() {
+  document.getElementById('quizContainer').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'block';
+
+  // Emoticon element verbergen als het aanwezig is
+  const badgeIcon = document.getElementById('scoreBadgeIcon');
+  if (badgeIcon) {
+    badgeIcon.style.display = 'none';
+  }
+
+  document.getElementById('finalScoreVal').innerText = `${userScore} / ${quizPool.length}`;
+
+  let rank = 'Beginner';
+  let title = 'Resultaat Voltooid';
+  let insight = 'Je hebt de basis van de wetenschap over het brein verkend. Doe de quiz gerust nog een keer om nieuwe vragen te ontdekken!';
+
+  const pct = (userScore / quizPool.length) * 100;
+
+  if (pct >= 85) {
+    rank = 'Neurowetenschapper';
+    title = 'Uitstekend Begrip!';
+    insight = 'Indrukwekkend! Je hebt een uitstekend inzicht in hoe het zenuwstelsel reageert op prikkels, slaap en de natuur.';
+  } else if (pct >= 60) {
+    rank = 'Onderzoeker';
+    title = 'Mooie Prestatie!';
+    insight = 'Je begrijpt de belangrijkste principes van het brein en de onderzoeksresultaten heel goed.';
+  } else if (pct >= 40) {
+    rank = 'Verkenner';
+    title = 'Goede Basis!';
+    insight = 'Je hebt al een solide basiskennis opgebouwd over de werking van het zenuwstelsel.';
+  }
+
+  document.getElementById('scoreTitle').innerText = title;
+  document.getElementById('finalRankVal').innerText = rank;
+  document.getElementById('scoreInsight').innerText = insight;
+}
+
+document.getElementById('btnRestartQuiz').addEventListener('click', startNewQuiz);
+
+startNewQuiz();
 requestAnimationFrame(draw);
