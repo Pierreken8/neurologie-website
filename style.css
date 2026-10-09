@@ -448,3 +448,35 @@ canvas {
     line-height: 1.4;
     word-break: break-word;
 }
+
+.quiz-options {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    margin-bottom: 16px !important;
+}
+
+@media (min-width: 600px) {
+    .quiz-options {
+        grid-template-columns: 1fr 1fr !important;
+    }
+}
+
+.quiz-opt-btn {
+    width: 100% !important;
+    background: var(--surface-bg) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 12px 14px !important;
+    border-radius: 2px !important;
+    font-size: 0.88rem !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+    line-height: 1.4 !important;
+}
+
+.quiz-opt-btn:hover {
+    border-color: var(--border-accent) !important;
+    background: #2e3338 !important;
+}
